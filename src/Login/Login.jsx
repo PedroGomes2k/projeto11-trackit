@@ -1,27 +1,56 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
+import StyleInputLogin from "./StyleInputLogin"
 
 export default function Habito() {
     return (
+        <Container>
+            <StylePalavra>
+                <p>Trackit</p>
+            </StylePalavra>
 
-
-        <StyleInput>
-            ,
-        <form>
-            <label for="nome"></label>
-
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Senha" />
-            <input type="submit"  />
-        </form>
-        </StyleInput>
+            <StyleInputLogin />
+            <Link to={"/cadastro"}>
+                <Cadastrar>
+                    Não tem uma conta? Cadastre-se!
+                </Cadastrar>
+            </Link>
+        </Container>
 
     )
 }
 
-const StyleInput = styled.div`
-    input{
-        width: 303px;
-        width: 45px;
-    }
+const Container = styled.div`
 
+    
+`
+const StylePalavra = styled.div`
+
+    display: flex;
+    justify-content: center;
+   
+    
+    p{  
+        width: 180px;
+        height: 86px;
+
+        font-size: 69px;
+        font-family: 'Playball';
+        font-style: normal;
+        font-weight: 400;
+
+        color: #126BA5;
+    }
+`
+
+
+const Cadastrar = styled.div`
+    color: #52B6FF;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14;
+
+    text-align: center;
+    text-decoration:underline;
 `

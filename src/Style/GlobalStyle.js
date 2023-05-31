@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
-	width: 375px;
+body{
+    background: #E5E5E5;
+}
 `
 
 export default GlobalStyle
