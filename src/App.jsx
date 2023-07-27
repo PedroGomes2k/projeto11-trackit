@@ -6,7 +6,8 @@ import Hoje from "./Page/Hoje/Hoje"
 import Historico from "./Page/Historico/Historico"
 import axios from "axios"
 import { useState } from 'react'
-import { TokenAut } from './Componentes/Token'
+import Menu from './Page/Menu/Menu'
+
 
 
 
@@ -24,13 +25,14 @@ export default function App() {
 
     <BrowserRouter>
       <Routes>
- 
+
         <Route path="/" element={<Login setToken={setToken} />}
         />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/habitos" element={<Habitos />} />
         <Route path="hoje" element={<Hoje />} />
         <Route path="/historico" element={<Historico />} />
+        <Route path="/menu" element={<Menu />} />
 
       </Routes>
     </ BrowserRouter>
