@@ -24,11 +24,8 @@ export default function App() {
 
     <BrowserRouter>
       <Routes>
-
-        <Route path="/" element={
-          <TokenAut.Provider value={setToken}>
-            <Login />
-          </TokenAut.Provider>}
+ 
+        <Route path="/" element={<Login setToken={setToken} />}
         />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/habitos" element={<Habitos />} />

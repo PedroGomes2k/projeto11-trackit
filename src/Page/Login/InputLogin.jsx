@@ -7,9 +7,9 @@ import { TokenAut } from "../../Componentes/Token"
 
 
 
-export default function InputLogin() {
+export default function InputLogin({setToken}) {
 
-    const { setToken } = useContext(TokenAut)
+
 
     const navigate = useNavigate()
     const [form, setForm] = useState({ email: "", password: "" })
@@ -22,7 +22,7 @@ export default function InputLogin() {
 
         const promise = axios.post(URL, form)
             .then(res => {
-                setToken(res.data.token)
+                //setToken(res.data.token)
                 navigate("/habitos")
             })
             .catch((erro) =>
