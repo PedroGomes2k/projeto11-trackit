@@ -1,18 +1,56 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useContext, useState, } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
+import { TokenAut } from "../../Componentes/Token"
+
 
 
 
 export default function InputLogin() {
+
+    const { setToken } = useContext(TokenAut)
+
+    const navigate = useNavigate()
+    const [form, setForm] = useState({ email: "", password: "" })
+
+
+    function chekLogin(e) {
+        e.preventDefault()
+
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+
+        const promise = axios.post(URL, form)
+            .then(res => {
+                setToken(res.data.token)
+                navigate("/habitos")
+            })
+            .catch((erro) =>
+                console.log(erro.error)
+            )
+
+    }
+
     return (
         <ContainerInput>
 
-            <form>
-                <input type="email" placeholder="email" required/>
-                <input type="password" placeholder="senha"  required/>
-                <Link to={'/habitos'}> 
-                    <button type="submit"> Entrar</button>
-                </Link>
+            <form onSubmit={chekLogin}>
+                <input type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="email"
+                    required
+                />
+
+                <input type="password"
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    placeholder="senha"
+                    required
+                />
+
+                <button type="submit"> Entrar</button>
+
             </form>
 
         </ContainerInput>

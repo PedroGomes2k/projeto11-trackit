@@ -5,6 +5,9 @@ import Habitos from "./Page/Habitos/Habitos"
 import Hoje from "./Page/Hoje/Hoje"
 import Historico from "./Page/Historico/Historico"
 import axios from "axios"
+import { useState } from 'react'
+import { TokenAut } from './Componentes/Token'
+
 
 
 
@@ -12,13 +15,21 @@ export default function App() {
 
   axios.defaults.headers.common['Authorization'] = 'yQLUKYNtQDLPq5KBDETYbFDq'
 
+  const [token, setToken] = useState([])
+
+
+
 
   return (
 
-
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+
+        <Route path="/" element={
+          <TokenAut.Provider value={setToken}>
+            <Login />
+          </TokenAut.Provider>}
+        />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/habitos" element={<Habitos />} />
         <Route path="hoje" element={<Hoje />} />
@@ -26,6 +37,8 @@ export default function App() {
 
       </Routes>
     </ BrowserRouter>
+
+
 
   )
 }

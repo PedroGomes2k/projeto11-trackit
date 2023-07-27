@@ -45,6 +45,7 @@ const ContainerCadastro = styled.div`
 
 const Cadastrar = styled.div`
 
+    margin-top: 5px;
     color: #52B6FF;
     text-decoration: underline;
    

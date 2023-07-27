@@ -1,53 +1,68 @@
+import axios from "axios"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
 
 export default function InputCadastro() {
 
-    const [email, setEmail] = useState("")
-    const [passWord, setPassWord] = useState("")
-    const [name, setName] = useState("")
-    const [image, setImage] = useState("")
+    const navigate = useNavigate()
+
+    const [form, setForm] = useState({ email: "", name: "", image: "", password: "" })
 
 
+    function register(e) {
+
+        e.preventDefault()
+
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+        const promise = axios.post(URL, form)
+            .then((resp) => {
+                console.log(resp.data)
+                navigate("/")
+
+            })
+            .catch((erro) =>
+                alert(`Seu cadastro deu um erro! Tente novamente :)`)
+            )
+    }
 
     return (
         <ContainerInput>
 
-            <form>
+            <form onSubmit={register}>
 
                 <input
                     type="email"
                     placeholder="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                     required
                 />
                 <input
                     type="password"
                     placeholder="senha"
-                    value={passWord}
-                    onChange={(e) => setPassWord(e.target.value)}
+                    value={form.passsword}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
                     required
                 />
                 <input
                     type="text"
                     placeholder="nome"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                     required
                 />
                 <input
                     type="url"
                     placeholder="foto"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
+                    value={form.image}
+                    onChange={(e) => setForm({ ...form, image: e.target.value })}
                     required
                 />
 
-                <Link to={'/'}>
-                    <button type="submit"> Cadastrar</button>
-                </Link>
+
+                <button type="submit" > Cadastrar</button>
+
             </form>
 
         </ContainerInput>
