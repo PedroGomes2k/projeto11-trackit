@@ -2,12 +2,13 @@ import { styled } from "styled-components"
 import Topo from "../Topo/Topo"
 import Menu from "../Menu/Menu"
 import HabitosDiarios from "./HabitosDiarios"
-export default function Habitos() {
+export default function Habitos({token}) {
+    
     return (
         <ContainerHabitos>
-            <Topo />
+            <Topo token={token}/>
 
-            <HabitosDiarios />
+            <HabitosDiarios token={token}/>
 
             <Menu />
         </ContainerHabitos>

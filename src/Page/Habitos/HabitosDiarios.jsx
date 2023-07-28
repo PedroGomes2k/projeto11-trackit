@@ -1,21 +1,27 @@
 import { styled } from "styled-components"
 import plus from "../../assets/plus.svg"
-import CriarHabito from "../../Componentes/CriarHabito"
+import CriarHabito from "../../Componentes/ComponetesHabito/CriarHabito"
+import { useState } from "react"
 
 
-export default function HabitosDiarios() {
+export default function HabitosDiarios({token}) {
 
+    const [disabled, setDisabled] = useState(false)
     function openCard() {
-      
+
     }
     return (
         <ContainerHabito>
             <Habito>
                 <h1>Meus Habitos</h1>
-                <Imagem> <img src={plus} alt="Button plus" onClick={() => openCard()} /> </Imagem>
+                <Imagem> <img src={plus} alt="Button plus" onClick={() => openCard(setDisabled(true))} /> </Imagem>
             </Habito>
 
-            <CriarHabito/>
+            <CriarHabito
+                disabled={disabled}
+                setDisabled={setDisabled}
+                token={token}
+            />
 
             <Text>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
@@ -60,9 +66,11 @@ const Imagem = styled.div`
 
     margin-right: 15px;
     margin-top: 20px;
+    cursor: pointer;
     img{
         width: 16px;
         height: 34px; 
+        
     }
 `
 const Text = styled.div`
@@ -80,7 +88,4 @@ const Text = styled.div`
     text-align: left;
 
     color: #666666;
-`
-const CardOpen = styled`
-    
 `

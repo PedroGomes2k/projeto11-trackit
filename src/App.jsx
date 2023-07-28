@@ -14,9 +14,9 @@ import Menu from './Page/Menu/Menu'
 
 export default function App() {
 
-  axios.defaults.headers.common['Authorization'] = 'yQLUKYNtQDLPq5KBDETYbFDq'
+  
 
-  const [token, setToken] = useState([])
+  const [token, setToken] = useState("")
 
 
 
@@ -26,14 +26,12 @@ export default function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Login setToken={setToken} />}
-        />
+        <Route path="/" element={<Login setToken={setToken} />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/habitos" element={<Habitos />} />
+        <Route path="/habitos" element={<Habitos token={token} />} />
         <Route path="hoje" element={<Hoje />} />
         <Route path="/historico" element={<Historico />} />
-        <Route path="/menu" element={<Menu />} />
-
+        
       </Routes>
     </ BrowserRouter>
 

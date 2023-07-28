@@ -2,7 +2,7 @@ import axios from "axios"
 import { useContext, useState, } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
-import { TokenAut } from "../../Componentes/Token"
+
 
 
 
@@ -22,12 +22,13 @@ export default function InputLogin({setToken}) {
 
         const promise = axios.post(URL, form)
             .then(res => {
-                //setToken(res.data.token)
+                setToken(res.data)
                 navigate("/habitos")
             })
-            .catch((erro) =>
+            .catch((erro) =>{
                 console.log(erro.error)
-            )
+                alert("deu error nessa bosta" + erro.error)
+            })
 
     }
 
