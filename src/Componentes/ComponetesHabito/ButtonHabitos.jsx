@@ -1,66 +1,88 @@
 import { styled } from "styled-components"
-import { Letras } from "../../Page/Habitos/Letras";
+import { Letras } from "../../Constans/Letras";
 import { ColorsChose } from "../../Constans/Colors";
 import { useEffect, useState } from "react";
 
 
 export default function ButtonHabitos({ newHabit, setNewHabit }) {
 
+
+    const [status, setStatus] = useState("normal")
     const { chose, waitchose } = ColorsChose
-    const [status, setStatus] = useState("")
-    const [day, setDay] = useState([])
 
-    useEffect(()=>{
 
-       
-    } , [])
+
+
 
     function rotineDay(i) {
+        if (status === "normal") {
+            setStatus("selected")
+        } else if (status === "selected") {
+            setStatus("normal")
+        }
 
-        setDay([...day, i])
+        setNewHabit({ ...newHabit, days: [...newHabit.days, i] })
 
-        const dayChose = day
-
-        setNewHabit({ ...newHabit, days: dayChose })
-
-    }   
+        
+    }
 
 
     return (
-        <Button >
-            {Letras.map((l) =>
-                <button
-                    key={l.id}
-                    onClick={() => rotineDay(l.id)}
-                    status={status}
-                    waitchose={waitchose}
-                >
-                    {l.letra}
-                </button>
-            )}
-        </Button>
+        <ButtonDay >
+            <Button>
+                {Letras.map((l) =>
+                    <button
+                        key={l.id}
+                        onClick={() => rotineDay(l.id)}
+                        status={status}
+                        chose={chose.background}
+                        waitchose={waitchose}
+                    >
+                        {l.letra}
+                    </button>
+
+                )}
+            </Button>
+        </ButtonDay>
     )
 }
 
 
-const Button = styled.div`
-    display: flex;
-    justify-content: space-between;
+const ButtonDay = styled.div`
+   
 
     width:215px;    
     margin-left:15px;
 
 
-    button{
+  
+`
+const Button = styled.div`
+     display: flex;
+    justify-content: space-between;
 
-        font-family: Lexend Deca;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 25px;
-        letter-spacing: 0em;
-        text-align: left;
+    background-color: ${(props) =>
+        props.status
 
-        border-radius: 5px;
-        border: 1px solid #D4D4D4
+        ? props.status === "selected"
+        : "blue"
+            
+        ? props.waitchose
+        : "red"
+                 
+    };
+
+    button {
+    
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    border-radius: 5px;
+    border: 1px solid #D4D4D4
     }
+    
 `

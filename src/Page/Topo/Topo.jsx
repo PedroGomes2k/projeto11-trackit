@@ -1,13 +1,17 @@
 import { styled } from "styled-components"
+import { TokenAuten } from "../../Contex/Token"
+import { useContext } from "react"
+import logo from "../../assets/logo-mini.svg"
 
 
-export default function Topo({ token }) {
+export default function Topo() {
+
+    const {token} = useContext(TokenAuten)
+    
     
     return (
         <TopoStyle>
-            <h1>
-                Trackit
-            </h1>
+            <Image><img src={logo} alt="logo-mini" /></Image>
             <img src={token.image} alt="imagem do usuário" />
         </TopoStyle>
     )
@@ -22,6 +26,7 @@ const TopoStyle = styled.div`
     background-color: #126BA5;
     box-shadow: 0px 4px 4px 0px #00000026;
 
+    position: relative;
 
     img{
         
@@ -37,4 +42,12 @@ const TopoStyle = styled.div`
         margin: auto 15px;
         color: #FFFFFF;
     }
+`
+const Image = styled.div`
+    img{
+        width: 97px;
+        height: 49px;
+    }   
+
+    margin: auto 0px;
 `

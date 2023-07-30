@@ -3,13 +3,14 @@ import logo from "../../assets/logo.svg"
 import InputLogin from "./InputLogin"
 import { Link } from "react-router-dom"
 
-export default function Login({setToken}) {
+export default function Login() {
+    
     return (
         <ContainerLogin>
 
             <img src={logo} alt="Imagem do Logo" />
 
-            <InputLogin  setToken={setToken}/>
+            <InputLogin />
 
             <Link to={'/cadastro'}>
             <Cadastrar>
@@ -24,15 +25,17 @@ export default function Login({setToken}) {
 const ContainerLogin = styled.div`
    
     width: 375px;
+    height: 667px;
     
-    justify-content: center;
+    
+    
+    margin: 0px auto;
     
 
     
     img{
     
-        display: flex;
-        align-items: center;
+        margin: 0px 50px;
         width: 180px;
         height: 179px;
                

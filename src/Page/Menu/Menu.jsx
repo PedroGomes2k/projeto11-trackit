@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { styled } from "styled-components"
 
 
@@ -6,9 +7,18 @@ export default function Menu() {
     return (
         <MenuStyle>
 
-            <Habitos>Habitos</Habitos>
-            <Hoje> Hoje</Hoje>
-            <Historico>Historico</Historico>
+            <Link to={"/habitos"}>
+                <Habitos>Habitos</Habitos>
+            </Link>
+
+            <Link to={"/hoje"}>
+                <Hoje> Hoje</Hoje>
+            </Link>
+
+            <Link to={"/historico"}>
+                <Historico>Historico</Historico>
+            </Link>
+
 
         </MenuStyle>
     )
@@ -22,7 +32,7 @@ const MenuStyle = styled.div`
 
   
     background-color: #FFFFFF;
-
+    position: fixed;
 `
 
 const Hoje = styled.div`
@@ -39,14 +49,22 @@ const Hoje = styled.div`
 
     position: relative;
     bottom:30px;
+
+  
+   
 `
 
 const Historico = styled.div`
-    margin: auto 15px;
+    margin: 30px 15px;
+    
     color: #52B6FF;
+
+    text-decoration: none;
     
 `
 const Habitos = styled.div`
-    margin: auto 15px;
+    margin: 30px 15px;
     color: #52B6FF;
+    text-decoration: none;
+
 `

@@ -1,19 +1,19 @@
 import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-import { ColorsChose } from "../../Constans/Colors";
+import { useContext, useEffect, useState } from "react";
+import { ColorsChose } from "../../Constans/Colors"
 import ButtonHabitos from "./ButtonHabitos";
 import axios from "axios"
+import { TokenAuten } from "../../Contex/Token";
 
-export default function CriarHabito({ disabled, setDisabled, token }) {
+export default function CriarHabito() {
 
-
-    console.log(token)
+    const { token, disabled, setDisabled, } = useContext(TokenAuten)
+    
+   
     const [newHabit, setNewHabit] = useState({ name: "", days: "" })
 
 
-    function saveHabit() {
-
-    }
+  
 
     function creatHabit(e) {
         e.preventDefault()
@@ -29,8 +29,13 @@ export default function CriarHabito({ disabled, setDisabled, token }) {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
 
         const promise = axios.post(URL, newHabit, config)
-            .then((res) =>
-                console.log(res.data)
+            .then((res) =>{
+                
+                setDisabled(false)
+               
+                setNewHabit({ name: "", days: "" })
+                
+                }
             )
             .catch((erro) =>
                 console.log(erro.error)
@@ -50,18 +55,20 @@ export default function CriarHabito({ disabled, setDisabled, token }) {
 
     } else {
         return (
+            <>
             <CardHabitos onSubmit={creatHabit}>
                 <input
                     type="text"
                     placeholder="nome do habito"
                     value={newHabit.name}
                     onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
+                    required
                 />
                 <ButtonHabitos
 
                     newHabit={newHabit}
                     setNewHabit={setNewHabit}
-
+                    
                 />
 
                 <Save>
@@ -73,6 +80,9 @@ export default function CriarHabito({ disabled, setDisabled, token }) {
                     </form>
                 </Save>
             </CardHabitos>
+
+           
+            </>
         )
     }
 

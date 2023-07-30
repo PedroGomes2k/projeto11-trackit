@@ -2,15 +2,17 @@ import axios from "axios"
 import { useContext, useState, } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
+import { TokenAuten } from "../../Contex/Token"
 
 
 
 
+export default function InputLogin() {
 
-export default function InputLogin({setToken}) {
+    const { setToken, token} = useContext(TokenAuten)
 
 
-
+    
     const navigate = useNavigate()
     const [form, setForm] = useState({ email: "", password: "" })
 

@@ -1,12 +1,14 @@
 import { styled } from "styled-components"
 import plus from "../../assets/plus.svg"
 import CriarHabito from "../../Componentes/ComponetesHabito/CriarHabito"
-import { useState } from "react"
+import { TokenAuten } from "../../Contex/Token"
+import { useContext } from "react"
+import TextFooter from "../../Componentes/ComponetesHabito/TextFooter"
+import HabitosSemanais from "../../Componentes/ComponetesHabito/HabitosSemanais"
 
+export default function HabitosDiarios() {
+    const { setDisabled } = useContext(TokenAuten)
 
-export default function HabitosDiarios({token}) {
-
-    const [disabled, setDisabled] = useState(false)
     function openCard() {
 
     }
@@ -17,23 +19,25 @@ export default function HabitosDiarios({token}) {
                 <Imagem> <img src={plus} alt="Button plus" onClick={() => openCard(setDisabled(true))} /> </Imagem>
             </Habito>
 
-            <CriarHabito
-                disabled={disabled}
-                setDisabled={setDisabled}
-                token={token}
-            />
+            <CriarHabito />
 
-            <Text>
-                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-            </Text>
+            <HabitosSemanais />
+
+            <TextFooter />
         </ContainerHabito>
     )
 }
 const ContainerHabito = styled.div`
     width: 375px;
-    height: 407px;
+    height: 445px;
     background-color: #F2F2F2;
 
+    overflow-x: hidden;
+   
+
+
+   
+    
     
 `
 const Habito = styled.div`
@@ -73,19 +77,4 @@ const Imagem = styled.div`
         
     }
 `
-const Text = styled.div`
-    width:300px;
-    height: 74px;
 
-    margin-top: 20px;
-    margin-left: 13px;
-
-    font-family: Lexend Deca;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: left;
-
-    color: #666666;
-`

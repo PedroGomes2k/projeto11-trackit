@@ -2,6 +2,13 @@ import { createGlobalStyle } from "styled-components"
 
  export const GlobalStyle = createGlobalStyle`
     body{
-        background-color: #f08080;
+        display: flex;
+        justify-content: center;
+        background-color: #bdbcbcd5;
+
+        a:link{
+            text-decoration: none;
+        }
+      
     }
 `

@@ -2,13 +2,13 @@ import { styled } from "styled-components"
 import Topo from "../Topo/Topo"
 import Menu from "../Menu/Menu"
 import HabitosDiarios from "./HabitosDiarios"
-export default function Habitos({token}) {
+export default function Habitos() {
     
     return (
         <ContainerHabitos>
-            <Topo token={token}/>
+            <Topo />
 
-            <HabitosDiarios token={token}/>
+            <HabitosDiarios/>
 
             <Menu />
         </ContainerHabitos>
@@ -16,5 +16,5 @@ export default function Habitos({token}) {
 }
 
 const ContainerHabitos = styled.div`
-    
+  
 `
