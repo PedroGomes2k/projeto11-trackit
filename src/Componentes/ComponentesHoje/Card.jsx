@@ -5,9 +5,9 @@ import axios from "axios"
 import check from "../../assets/check.svg"
 
 
-export default function Card({ currentSequence, highestSequence, name, id, token }) {
+export default function Card({ currentSequence, highestSequence, name, id}) {
 
-    const { habitDay, setHabitDay } = useContext(TokenAuten)
+    const { habitDay, setHabitDay, token } = useContext(TokenAuten)
     const [make, setMake] = useState("normal")
 
 
@@ -33,7 +33,7 @@ export default function Card({ currentSequence, highestSequence, name, id, token
 
             const URL = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, body, config)
                 .then((res) =>
-                    console.log(res)
+                    console.log("deu certo")
                 ).catch((erro) =>
                     console.log("erro check")
                 )
