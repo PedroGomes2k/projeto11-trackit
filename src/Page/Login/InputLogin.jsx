@@ -42,6 +42,7 @@ export default function InputLogin() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="email"
+                    data-test="email-input"
                     required
                 />
 
@@ -49,10 +50,11 @@ export default function InputLogin() {
                     value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}
                     placeholder="senha"
+                    data-test="password-input"
                     required
                 />
 
-                <button type="submit"> Entrar</button>
+                <button type="submit" data-test="login-btn"> Entrar</button>
 
             </form>
 

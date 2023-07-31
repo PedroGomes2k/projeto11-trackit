@@ -16,8 +16,8 @@ export default function InputCadastro() {
 
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
         const promise = axios.post(URL, form)
-            .then((resp) => {
-                console.log(resp.data)
+            .then(( ) => {
+               
                 navigate("/")
 
             })
@@ -36,13 +36,15 @@ export default function InputCadastro() {
                     placeholder="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    data-test="email-input"
                     required
                 />
                 <input
                     type="password"
                     placeholder="senha"
-                    value={form.passsword}
+                    value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    data-test="password-input"
                     required
                 />
                 <input
@@ -50,6 +52,7 @@ export default function InputCadastro() {
                     placeholder="nome"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    data-test="user-name-input"
                     required
                 />
                 <input
@@ -57,11 +60,12 @@ export default function InputCadastro() {
                     placeholder="foto"
                     value={form.image}
                     onChange={(e) => setForm({ ...form, image: e.target.value })}
+                    data-test="user-image-input"
                     required
                 />
 
 
-                <button type="submit" > Cadastrar</button>
+                <button type="submit" data-test="signup-btn" > Cadastrar</button>
 
             </form>
 

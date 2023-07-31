@@ -1,11 +1,54 @@
+import { useContext, useEffect } from "react"
 import { styled } from "styled-components"
-
+import { TokenAuten } from "../../Contex/Token"
+import Card from "./Card"
+import axios from "axios"
 
 export default function Hoje() {
+
+    const { habitDay, setHabitDay, token } = useContext(TokenAuten)
+
+
+    useEffect(() => {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token.token}`
+            }
+        }
+
+        const URL = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+            .then((res) => {
+
+                setHabitDay(res.data)
+            }
+            ).catch((erro) =>
+                console.log(erro.error)
+            )
+
+    }, [])
+
+
     return (
         <Container>
-            <h1>Segunda, 17/05</h1>
-            <p>Nenhum hábito concluído ainda</p>
+            <Text>
+                <h1 data-test="today">Segunda, 31/07</h1>
+                <p data-test="today-counter">Nenhum hábito concluído ainda</p>
+            </Text>
+            <ContainerCards>
+                {habitDay.map((h) =>
+                    <Card
+                        currentSequence={h.currentSequence}
+                        highestSequence={h.highestSequence}
+                        id={h.id}
+                        name={h.name}
+                        token={token}
+                        key={h.id}
+                    />
+                )}
+
+
+            </ContainerCards>
         </Container>
     )
 }
@@ -19,6 +62,11 @@ const Container = styled.div`
     flex-direction: column;
 
     background-color: #F2F2F2;
+
+    overflow-x: hidden;
+    
+`
+const Text = styled.div`
 
     h1{
 
@@ -36,7 +84,7 @@ const Container = styled.div`
 
     p{
 
-   
+
     margin-left: 13px;
     font-family: Lexend Deca;
     font-size: 18px;
@@ -48,3 +96,9 @@ const Container = styled.div`
     color:#666666;
     }
 `
+const ContainerCards = styled.div`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+`
+

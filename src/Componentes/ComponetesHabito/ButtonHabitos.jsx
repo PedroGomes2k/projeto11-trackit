@@ -1,15 +1,13 @@
 import { styled } from "styled-components"
-import { Letras } from "../../Constans/Letras";
 import { ColorsChose } from "../../Constans/Colors";
 import { useEffect, useState } from "react";
 
 
-export default function ButtonHabitos({ newHabit, setNewHabit }) {
+export default function ButtonHabitos({ newHabit, setNewHabit, letra, id }) {
 
 
-    const [status, setStatus] = useState("normal")
+    const [status, setStatus] = useState('normal')
     const { chose, waitchose } = ColorsChose
-
 
 
 
@@ -18,61 +16,50 @@ export default function ButtonHabitos({ newHabit, setNewHabit }) {
         if (status === "normal") {
             setStatus("selected")
         } else if (status === "selected") {
+
             setStatus("normal")
         }
+        console.log(status)
 
         setNewHabit({ ...newHabit, days: [...newHabit.days, i] })
 
-        
     }
 
 
     return (
-        <ButtonDay >
-            <Button>
-                {Letras.map((l) =>
-                    <button
-                        key={l.id}
-                        onClick={() => rotineDay(l.id)}
-                        status={status}
-                        chose={chose.background}
-                        waitchose={waitchose}
-                    >
-                        {l.letra}
-                    </button>
 
-                )}
-            </Button>
-        </ButtonDay>
+        <Button
+            data-test="habit-day"
+            onClick={() => rotineDay(id)}
+            status={status}
+            chose={chose}
+            wait={waitchose}
+        >
+
+            {letra}
+        </Button>
+
     )
 }
 
 
-const ButtonDay = styled.div`
-   
 
-    width:215px;    
-    margin-left:15px;
-
-
-  
-`
-const Button = styled.div`
+const Button = styled.button`
      display: flex;
     justify-content: space-between;
-
     background-color: ${(props) =>
-        props.status
 
-        ? props.status === "selected"
-        : "blue"
-            
-        ? props.waitchose
-        : "red"
-                 
+        props.status === "normal"
+            ? props.wait.background
+            : props.chose.background
+    };
+    color: ${(props) =>
+
+        props.status === "normal"
+            ? props.wait.color
+            : props.chose.color
     };
 
-    button {
     
     font-family: Lexend Deca;
     font-size: 20px;
@@ -82,7 +69,7 @@ const Button = styled.div`
     text-align: left;
 
     border-radius: 5px;
-    border: 1px solid #D4D4D4
-    }
+    border: 1px solid #D4D4D4;
+   
     
 `

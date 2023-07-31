@@ -4,7 +4,7 @@ import InputLogin from "./InputLogin"
 import { Link } from "react-router-dom"
 
 export default function Login() {
-    
+
     return (
         <ContainerLogin>
 
@@ -12,10 +12,10 @@ export default function Login() {
 
             <InputLogin />
 
-            <Link to={'/cadastro'}>
-            <Cadastrar>
-                Não tem uma conta? Cadastre-se!
-            </Cadastrar>
+            <Link to={'/cadastro'} data-test="signup-link">
+                <Cadastrar >
+                    Não tem uma conta? Cadastre-se!
+                </Cadastrar>
             </Link>
 
         </ContainerLogin>

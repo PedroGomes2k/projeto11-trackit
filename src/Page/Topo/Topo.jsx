@@ -6,13 +6,13 @@ import logo from "../../assets/logo-mini.svg"
 
 export default function Topo() {
 
-    const {token} = useContext(TokenAuten)
-    
-    
+    const { token } = useContext(TokenAuten)
+
+
     return (
-        <TopoStyle>
-            <Image><img src={logo} alt="logo-mini" /></Image>
-            <img src={token.image} alt="imagem do usuário" />
+        <TopoStyle data-test="header">
+            <Image ><img src={logo} alt="logo-mini" /></Image>
+            <img src={token.image} alt="imagem do usuário" data-test="avatar" />
         </TopoStyle>
     )
 }

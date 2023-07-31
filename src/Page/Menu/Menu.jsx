@@ -5,17 +5,17 @@ import { styled } from "styled-components"
 
 export default function Menu() {
     return (
-        <MenuStyle>
+        <MenuStyle data-test="menu">
 
-            <Link to={"/habitos"}>
+            <Link to={"/habitos"} data-test="habit-link">
                 <Habitos>Habitos</Habitos>
             </Link>
 
-            <Link to={"/hoje"}>
+            <Link to={"/hoje"} data-test="today-link">
                 <Hoje> Hoje</Hoje>
             </Link>
 
-            <Link to={"/historico"}>
+            <Link to={"/historico"} data-test="history-link">
                 <Historico>Historico</Historico>
             </Link>
 
@@ -33,6 +33,7 @@ const MenuStyle = styled.div`
   
     background-color: #FFFFFF;
     position: fixed;
+    font-family: Lexend Deca;
 `
 
 const Hoje = styled.div`

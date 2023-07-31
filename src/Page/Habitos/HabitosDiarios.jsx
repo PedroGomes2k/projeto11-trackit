@@ -3,7 +3,7 @@ import plus from "../../assets/plus.svg"
 import CriarHabito from "../../Componentes/ComponetesHabito/CriarHabito"
 import { TokenAuten } from "../../Contex/Token"
 import { useContext } from "react"
-import TextFooter from "../../Componentes/ComponetesHabito/TextFooter"
+
 import HabitosSemanais from "../../Componentes/ComponetesHabito/HabitosSemanais"
 
 export default function HabitosDiarios() {
@@ -16,14 +16,19 @@ export default function HabitosDiarios() {
         <ContainerHabito>
             <Habito>
                 <h1>Meus Habitos</h1>
-                <Imagem> <img src={plus} alt="Button plus" onClick={() => openCard(setDisabled(true))} /> </Imagem>
+                <button
+                    onClick={() => openCard(setDisabled(true))}
+                    data-test="habit-create-btn"
+                >
+                    <img src={plus} alt="Button plus" />
+                </button>
             </Habito>
 
             <CriarHabito />
 
             <HabitosSemanais />
 
-            <TextFooter />
+
         </ContainerHabito>
     )
 }
@@ -35,10 +40,6 @@ const ContainerHabito = styled.div`
     overflow-x: hidden;
    
 
-
-   
-    
-    
 `
 const Habito = styled.div`
     display: flex;
@@ -57,24 +58,25 @@ const Habito = styled.div`
 
         color: #126BA5;
     }
+    button{
+        display: flex;
+        width: 40px;
+        height: 35px;
 
-`
-const Imagem = styled.div`
-    display: flex;
-    width: 40px;
-    height: 35px;
+        justify-content: center;
+        background-color: #52B6FF;
+        border-radius: 5px;
+        border: 1px solid  #52B6FF;
 
-    justify-content: center;
-    background-color: #52B6FF;
-    border-radius: 5px;
-
-    margin-right: 15px;
-    margin-top: 20px;
-    cursor: pointer;
+        margin-right: 15px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
     img{
         width: 16px;
         height: 34px; 
         
     }
 `
+
 

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { useContext, useEffect, useState } from "react";
+import { Letras } from "../../Constans/Letras";
 import { ColorsChose } from "../../Constans/Colors"
 import ButtonHabitos from "./ButtonHabitos";
 import axios from "axios"
@@ -7,18 +8,18 @@ import { TokenAuten } from "../../Contex/Token";
 
 export default function CriarHabito() {
 
-    const { token, disabled, setDisabled, } = useContext(TokenAuten)
-    
-   
+    const { token, disabled, setDisabled, setInfCard, infCard } = useContext(TokenAuten)
+
+
     const [newHabit, setNewHabit] = useState({ name: "", days: "" })
 
 
-  
+
 
     function creatHabit(e) {
         e.preventDefault()
 
-      
+
         const config = {
             headers: {
                 Authorization: `Bearer ${token.token}`
@@ -29,13 +30,13 @@ export default function CriarHabito() {
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
 
         const promise = axios.post(URL, newHabit, config)
-            .then((res) =>{
-                
+            .then((res) => {
+
                 setDisabled(false)
-               
+
                 setNewHabit({ name: "", days: "" })
-                
-                }
+                setInfCard([...infCard, res.data])
+            }
             )
             .catch((erro) =>
                 console.log(erro.error)
@@ -56,32 +57,40 @@ export default function CriarHabito() {
     } else {
         return (
             <>
-            <CardHabitos onSubmit={creatHabit}>
-                <input
-                    type="text"
-                    placeholder="nome do habito"
-                    value={newHabit.name}
-                    onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
-                    required
-                />
-                <ButtonHabitos
 
-                    newHabit={newHabit}
-                    setNewHabit={setNewHabit}
-                    
-                />
+                <CardHabitos onSubmit={creatHabit} data-test="habit-create-container" >
+                    <input
+                        type="text"
+                        placeholder="nome do habito"
+                        value={newHabit.name}
+                        onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
+                        data-test="habit-name-input"
+                        required
+                    />
+                    <ButtonDay >
 
-                <Save>
+                        {Letras.map((l) =>
+                            <ButtonHabitos
 
-                    <p onClick={() => cancelHabit()}> Cancelar </p>
+                                newHabit={newHabit}
+                                setNewHabit={setNewHabit}
+                                letra={l.letra}
+                                id={l.id}
+                                key={l.id}
+                            />
+                        )}
+                    </ButtonDay>
+                    <Save>
+                        <CancelButton>
+                            <button onClick={() => cancelHabit()} data-test="habit-create-cancel-btn"> Cancelar </button>
+                        </CancelButton>
+                        <form action="">
+                            <button type="submit" data-test="habit-create-save-btn"> Salvar</button>
+                        </form>
+                    </Save>
+                </CardHabitos>
 
-                    <form action="">
-                        <button type="submit"> Salvar</button>
-                    </form>
-                </Save>
-            </CardHabitos>
 
-           
             </>
         )
     }
@@ -110,6 +119,12 @@ const CardHabitos = styled.div`
         border: 1px solid #D4D4D4
     }
 `
+const ButtonDay = styled.div`
+    width:215px;    
+    margin-left:15px;
+    display: flex;
+    justify-content: space-around;
+`
 
 const Save = styled.div`
 
@@ -118,21 +133,7 @@ const Save = styled.div`
     margin-top: 25px;
     margin-right: 15px;
 
-    p{
-        font-family: Lexend Deca;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: 0em;
-        text-align: center;
-
-        color:#52B6FF;
-        margin-top: 7px;
-        margin-right: 30px;
-
-        cursor: pointer;
-    }   
-
+    
     button{
         width: 84px;
         height: 35px;
@@ -150,6 +151,24 @@ const Save = styled.div`
 
         color: #FFFFFF;
         text-align: center;
+
+        cursor: pointer;
+    }
+`
+const CancelButton = styled.div`
+    button{
+        background-color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        font-family: Lexend Deca;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: center;
+
+        color:#52B6FF;
+
+        margin-right: 10px;
 
         cursor: pointer;
     }

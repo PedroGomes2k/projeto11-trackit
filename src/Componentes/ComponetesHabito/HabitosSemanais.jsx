@@ -1,14 +1,29 @@
 import { styled } from "styled-components"
 import dump from "../../assets/dump.svg"
 import { Letras } from "../../Constans/Letras"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { TokenAuten } from "../../Contex/Token"
+import TextFooter from "../../Componentes/ComponetesHabito/TextFooter"
 import axios from "axios"
 
 
 export default function HabitosSemanais() {
 
     const { infCard, setInfCard, token } = useContext(TokenAuten)
+    const {days, id} = infCard
+    const [status, setStatus] = useState('normal')
+
+   
+    useEffect(() => {
+
+        if (infCard) {
+            console.log(id)
+        } else if (status === "selected") {
+            setStatus("selected")        
+        }
+    }, [])
+
+    
 
     useEffect(() => {
         const config = {
@@ -37,45 +52,51 @@ export default function HabitosSemanais() {
         }
 
         const URL = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
-            .then((res) => {
+            .then(() => {
                 setInfCard(infCard.filter(infCard => infCard.id !== id))
-                
+
             }
             )
             .catch((erro) =>
                 console.log(erro.error))
     }
 
+    if (infCard.length === 0) {
+        return (
+            <TextFooter />
+        )
+    } else {
 
-    return (
-        <Container>
-            {infCard && infCard.map((i) =>
-                <HabitoSemanal key={i.id}>
+        return (
+            <Container >
+                {infCard && infCard.map((i) =>
+                    <HabitoSemanal key={i.id} data-test="habit-container">
 
+                        <Habito>
+                            <p data-test="habit-name">{i.name}</p>
+                            <Image data-test="habit-delete-btn"> <img src={dump} alt="imagem para excluir" onClick={() => deleteCard(i.id)} /></Image>
+                        </Habito>
 
-                    <Habito>
-                        <p>{i.name}</p>
-                        <Image> <img src={dump} alt="imagem para excluir" onClick={() => deleteCard(i.id)} /></Image>
-                    </Habito>
+                        <Button
+                            status={status}
+                            data-test="habit-day"
+                        >
+                            {Letras.map((l) =>
+                                <button
+                                    key={l.id}
+                                >
+                                    {l.letra}
+                                </button>
 
+                            )}
+                        </Button>
 
+                    </HabitoSemanal>
+                )}
 
-                    <Button>
-                        {Letras.map((l) =>
-                            <button
-                                key={l.id}
-                            >
-                                {l.letra}
-                            </button>
-
-                        )}
-                    </Button>
-
-                </HabitoSemanal>
-            )}
-
-        </Container>
-    )
+            </Container>
+        )
+    }
 }
 const Container = styled.div`
     margin:0px 18px;
@@ -130,6 +151,11 @@ img{
 
 const Button = styled.div`
  button {
+    background-color: ${props =>
+        props.status === "normal"
+            ? "#FFFFFF"
+            : "#CFCFCF"
+    };
     
     font-family: Lexend Deca;
     font-size: 20px;
@@ -146,3 +172,8 @@ const Button = styled.div`
 
     }
 `
+/* ${props => {
+        if (props.status === "selected") {
+            return `${props.isSelected.border}`
+        } else if (props.status === "available") {
+            return `${props.avilable.border}` */

@@ -12,10 +12,10 @@ export default function Cadastro() {
 
             <img src={logo} alt="Imagem do Logo" />
 
-            <InputCadastro/>
+            <InputCadastro />
 
-            <Link to={'/'}>
-                <Cadastrar>
+            <Link to={'/'} data-test="login-link">
+                <Cadastrar >
                     Já tem uma conta? Faça login!
                 </Cadastrar>
             </Link>

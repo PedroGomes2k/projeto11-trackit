@@ -5,10 +5,12 @@ import { createGlobalStyle } from "styled-components"
         display: flex;
         justify-content: center;
         background-color: #bdbcbcd5;
+       
 
         a:link{
             text-decoration: none;
         }
+        
       
     }
 `
