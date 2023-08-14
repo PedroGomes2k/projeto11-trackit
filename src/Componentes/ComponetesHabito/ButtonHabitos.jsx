@@ -11,7 +11,7 @@ export default function ButtonHabitos({ newHabit, setNewHabit, letra, id }) {
 
 
 
-
+    //
     function rotineDay(i) {
         if (status === "normal") {
             setStatus("selected")
